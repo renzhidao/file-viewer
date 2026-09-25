@@ -61,7 +61,8 @@ const deepAll = (selector: string, root: ParentNode = document): Element[] => {
 }
 
 const fetchSample = async () => {
-  const response = await fetch('/example/ppt.pptx')
+    // fork 补丁：子路径部署时改写为相对路径，避免 404。
+  const response = await fetch(resolveDemoPublicUrl('/example/ppt.pptx'))
   if (!response.ok) {
     throw new Error(`sample fetch failed: ${response.status}`)
   }
@@ -71,7 +72,8 @@ const fetchSample = async () => {
 // The raw PptxViewer resolves its worker with `new URL('./worker/pptx.worker.js',
 // import.meta.url)`, which the demo build does not rewrite for this entry chunk.
 // Point it at the vendored worker copy the demo already ships instead.
-const PPTX_WORKER_URL = '/vendor/pptx/pptx.worker.js'
+// fork 补丁：子路径部署时改写为相对路径，避免 404。
+const PPTX_WORKER_URL = resolveDemoPublicUrl('/vendor/pptx/pptx.worker.js')
 
 const mountShadowTarget = () => {
   const host = document.getElementById('viewer-shadow-host')!

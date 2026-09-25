@@ -50,6 +50,7 @@ import {
 } from '@/composables/useDemoViewerSettings'
 import { useDemoViewerOperations } from '@/composables/useDemoViewerOperations'
 import { useDemoViewerOptions } from '@/composables/useDemoViewerOptions'
+import { resolveDemoPublicUrl } from '@/utils/demoPublicUrl'
 import type { DemoFormatSettingsSection } from '@/composables/useDemoViewerSettings'
 import type { DemoLocale } from '@/composables/useDemoCopy'
 import type { DemoSourcePanelAnchor } from '@/composables/useDemoFloatingPanels'

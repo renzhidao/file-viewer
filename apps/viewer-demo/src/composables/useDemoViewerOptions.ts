@@ -11,6 +11,7 @@ import { bpmnRenderer } from '@file-viewer/renderer-drawing/bpmn'
 import { signatureRenderer } from '@file-viewer/renderer-signature'
 import { enableFileViewerXmlProfiles } from '@file-viewer/renderer-text/xml-profiles'
 import { normalizeDemoDensity } from '@/composables/useDemoPreferences'
+import { resolveDemoPublicUrl } from '@/utils/demoPublicUrl'
 import { createDemoModelOptions } from '@/composables/useDemoViewerSettings'
 import type { DemoLocale } from '@/composables/useDemoCopy'
 import type { DemoViewerSettings } from '@/composables/useDemoViewerSettings'
@@ -131,11 +132,12 @@ export function useDemoViewerOptions(input: UseDemoViewerOptionsInput) {
     options.renderers = runtime.renderers ?? unifiedDemoRenderers
     if (!immersive && runtime.xml === undefined) {
       options.xml = {
-        profilesUrl: '/xml-profiles/profiles.json',
+        // fork 补丁：子路径部署时改写为相对路径，避免 404。
+        profilesUrl: resolveDemoPublicUrl('/xml-profiles/profiles.json'),
         labels: xmlLabels[input.locale.value],
         runtime: {
-          xsdWorkerUrl: '/file-viewer/xml/xmllint-browser.mjs',
-          xsltModuleUrl: '/file-viewer/xml/xslt-wasm.js'
+          xsdWorkerUrl: resolveDemoPublicUrl('/file-viewer/xml/xmllint-browser.mjs'),
+          xsltModuleUrl: resolveDemoPublicUrl('/file-viewer/xml/xslt-wasm.js')
         }
       }
     }

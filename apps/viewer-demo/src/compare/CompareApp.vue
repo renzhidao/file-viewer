@@ -20,6 +20,7 @@ import {
   extractComparableDocumentText,
   type TextDiffResult,
 } from './textDiff'
+import { resolveDemoPublicUrl } from '@/utils/demoPublicUrl'
 
 type CompareSide = 'left' | 'right'
 type DemoLocale = 'zh-CN' | 'en-US' | 'ja-JP' | 'de-DE'
@@ -1181,7 +1182,7 @@ watch(compareLocale, (nextLocale, previousLocale) => {
           <FileViewer
             :key="`${panel.side}-${panel.file ? panel.filename : panel.url}-${comparePdfToolbarHidden ? 'compact' : 'full'}`"
             :ref="el => setViewerRef(panel.side, el)"
-            :url="panel.file ? undefined : panel.url"
+            :url="panel.file ? undefined : resolveDemoPublicUrl(panel.url)"
             :file="panel.file"
             :options="viewerOptions"
             @load-start="handleLoadStart(panel)"
