@@ -57,7 +57,8 @@ const resolveInitialDemoLocale = (): DemoLocale => {
   if (storedLocale) {
     return normalizeDemoLocale(storedLocale)
   }
-  return normalizeDemoLocale('auto')
+  // fork 补丁：默认简体中文（可用 ?locale= / ?lang= 参数或界面切换器覆盖）。
+  return normalizeDemoLocale('zh-CN')
 }
 
 const compareLocale = ref<DemoLocale>(resolveInitialDemoLocale())

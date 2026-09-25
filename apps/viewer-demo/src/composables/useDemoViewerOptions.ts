@@ -46,7 +46,8 @@ const pptRuntimeAssetUrl = (path: string) => (
 // Renderer handlers use their concrete DOM targets internally. The public
 // options surface intentionally erases that implementation detail.
 const demoIfcRenderer = createIfcRenderer({
-  assetBaseUrl: '/file-viewer/vendor/ifc/',
+  // fork 补丁：子路径部署时改写为相对路径，避免 404。
+  assetBaseUrl: resolveDemoPublicUrl('/file-viewer/vendor/ifc/'),
   enableSelection: true,
   fitToModel: true,
   showProperties: true

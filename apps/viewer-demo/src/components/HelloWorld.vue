@@ -132,6 +132,8 @@ const {
 })
 const url = ref(demoFileHandoff.isEmbedRequest && !demoFileHandoff.initialUrl ? '' : DEFAULT_DEMO_URL_BY_LOCALE[demoLocale.value])
 const preview = ref('')
+// fork 补丁：子路径部署（GitHub Pages /file-viewer/）时把根绝对路径改写为相对路径，避免文件 404。
+const resolvedPreviewUrl = computed(() => resolveDemoPublicUrl(preview.value))
 
 // ── Page overlays and responsive controls ──────────────────────────────────
 //
@@ -1703,7 +1705,7 @@ function handleWindowResize() {
               :key='viewerRevision'
               ref='fileViewerRef'
               :file='file'
-              :url='preview'
+              :url='resolvedPreviewUrl'
               :options='viewerOptions'
               @load-start='handleViewerLoadStart'
               @operation-availability-change='handleViewerAvailabilityChange'
@@ -2004,7 +2006,7 @@ function handleWindowResize() {
             :key='viewerRevision'
             ref='fileViewerRef'
             :file='file'
-            :url='preview'
+            :url='resolvedPreviewUrl'
             :options='viewerOptions'
             @load-start='handleViewerLoadStart'
             @operation-availability-change='handleViewerAvailabilityChange'

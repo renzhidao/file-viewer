@@ -1,6 +1,7 @@
 import { PptxViewer } from '@file-viewer/pptx'
 import { renderFileViewerPresentation } from '@file-viewer/renderer-presentation'
 import type { FileViewerRenderedInstance } from '@file-viewer/core'
+import { resolveDemoPublicUrl } from '@/utils/demoPublicUrl'
 
 type ViewerName = 'default' | 'windowed' | 'shadow'
 type RendererName = 'rendererA' | 'rendererB'

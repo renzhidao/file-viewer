@@ -61,7 +61,8 @@ const resolveInitialLocale = () => {
   if (explicitLocale) return normalizeDemoLocale(explicitLocale)
   const storedLocale = readStorage(LOCALE_STORAGE_KEY)
   if (storedLocale) return normalizeDemoLocale(storedLocale)
-  return normalizeDemoLocale('auto')
+  // fork 补丁：默认简体中文（显式参数与已记忆的选择仍优先）。
+  return normalizeDemoLocale('zh-CN')
 }
 
 const resolveInitialDensity = () => (
